@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "babel":"babel --watch src --out-dir dist --presets react-app/prod",
     "terser": "terser -c -m -o dist/like_button.min.js -- src/like_button.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
