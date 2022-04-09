@@ -16,6 +16,7 @@
         padding-left: 30px;
       }
 
+      .serial-row:after,
       .board-row:after {
         clear: both;
         content: '';
@@ -39,6 +40,27 @@
         padding: 0;
         text-align: center;
         width: 34px;
+      }
+
+      .serial-row {
+        padding-left: 14px;
+      }
+      .serial-row .serial-number {
+        width: 34px;
+        text-align: center;
+      }
+
+      .board-row .serial-number {
+        height: 34px;
+        width: 14px;
+        margin-top: -1px;
+        display: flex;
+        align-items: center;
+      }
+
+      .serial-number {
+        display: block;
+        float: left;
       }
 
       .square:focus {

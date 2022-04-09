@@ -19,17 +19,25 @@ class Board extends React.Component {
   render() {
     return (
       <div>
+        <div className="serial-row">
+          <span className="serial-number">0</span>
+          <span className="serial-number">1</span>
+          <span className="serial-number">2</span>
+        </div>
         <div className="board-row">
+          <span className="serial-number">0</span>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
         </div>
         <div className="board-row">
+          <span className="serial-number">1</span>
           {this.renderSquare(3)}
           {this.renderSquare(4)}
           {this.renderSquare(5)}
         </div>
         <div className="board-row">
+          <span className="serial-number">2</span>
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
