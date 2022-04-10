@@ -133,8 +133,7 @@ class Game extends React.Component {
     if (winner) {
       status = 'Winner: ' + winner
     } else {
-      status =
-        '下一步: ' + (this.state.xIsNext ? <BlackPiece /> : <WhitePiece />)
+      status = this.state.xIsNext ? <BlackPiece /> : <WhitePiece />
     }
     return (
       <div className="game">
@@ -142,7 +141,7 @@ class Game extends React.Component {
           <Board current={current} onClick={(i) => this.handleClick(i)} />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <div className="status-area">下一步：{status}</div>
           <ol>{moves}</ol>
         </div>
       </div>
