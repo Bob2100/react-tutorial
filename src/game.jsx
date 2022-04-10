@@ -88,8 +88,8 @@ class Game extends React.Component {
           squares: squares,
           position: {
             index: i,
-            x: i % 3,
-            y: Math.floor(i / 3),
+            x: i % totalCol,
+            y: Math.floor(i / totalRow),
             who,
           },
         },
