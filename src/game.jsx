@@ -1,6 +1,6 @@
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className={props.className + ' square'} onClick={props.onClick}>
       {props.value}
     </button>
   )
@@ -10,7 +10,8 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
-        value={this.props.squares[i]}
+        className={this.props.current.position.index === i ? 'current' : ''}
+        value={this.props.current.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
     )
@@ -74,7 +75,12 @@ class Game extends React.Component {
       history: history.concat([
         {
           squares: squares,
-          position: [who, i % 3, Math.floor(i / 3)],
+          position: {
+            index: i,
+            x: i % 3,
+            y: Math.floor(i / 3),
+            who,
+          },
         },
       ]),
       stepNumber: history.length,
@@ -94,10 +100,13 @@ class Game extends React.Component {
 
     const moves = history.map((item, index) => {
       const desc = index
-        ? `回到第 ${index} 步，${item.position[0]}(${item.position[1]}, ${item.position[2]})`
-        : '回到开始'
+        ? `第 ${index} 步，${item.position.who}(${item.position.x}, ${item.position.y})`
+        : '开始'
       return (
-        <li key={index}>
+        <li
+          key={index}
+          className={index === this.state.stepNumber ? 'current' : ''}
+        >
           <button onClick={() => this.jumpTo(index)}>{desc}</button>
         </li>
       )
@@ -112,10 +121,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
+          <Board current={current} onClick={(i) => this.handleClick(i)} />
         </div>
         <div className="game-info">
           <div>{status}</div>
