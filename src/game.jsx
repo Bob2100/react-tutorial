@@ -1,5 +1,5 @@
-const totalRow = 20
-const totalCol = 20
+const totalRow = 19
+const totalCol = 19
 
 function Square(props) {
   return (
