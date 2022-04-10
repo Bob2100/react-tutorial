@@ -1,3 +1,6 @@
+const totalRow = 3
+const totalCol = 3
+
 function Square(props) {
   return (
     <button className={props.className + ' square'} onClick={props.onClick}>
@@ -10,6 +13,7 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        key={i}
         className={this.props.current.position.index === i ? 'current' : ''}
         value={this.props.current.squares[i]}
         onClick={() => this.props.onClick(i)}
@@ -18,6 +22,20 @@ class Board extends React.Component {
   }
 
   render() {
+    const squares = []
+    for (let row = 0; row < totalRow; row++) {
+      const cols = []
+      for (let col = 0; col < totalCol; col++) {
+        cols.push(this.renderSquare(row * totalRow + col))
+      }
+      const boardRow = (
+        <div className="board-row" key={row}>
+          <span className="serial-number">{row}</span>
+          {cols}
+        </div>
+      )
+      squares.push(boardRow)
+    }
     return (
       <div>
         <div className="serial-row">
@@ -25,24 +43,7 @@ class Board extends React.Component {
           <span className="serial-number">1</span>
           <span className="serial-number">2</span>
         </div>
-        <div className="board-row">
-          <span className="serial-number">0</span>
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          <span className="serial-number">1</span>
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          <span className="serial-number">2</span>
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {squares}
       </div>
     )
   }
