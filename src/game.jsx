@@ -1,5 +1,5 @@
-const totalRow = 3
-const totalCol = 3
+const totalRow = 20
+const totalCol = 20
 
 function Square(props) {
   return (
@@ -21,7 +21,7 @@ class Board extends React.Component {
     )
   }
 
-  render() {
+  getSquares() {
     const squares = []
     for (let row = 0; row < totalRow; row++) {
       const cols = []
@@ -36,14 +36,24 @@ class Board extends React.Component {
       )
       squares.push(boardRow)
     }
+    return squares
+  }
+  getColNums() {
+    const result = []
+    for (let i = 0; i < totalCol; i++) {
+      result.push(
+        <span key={i} className="serial-number">
+          {i}
+        </span>
+      )
+    }
+    return result
+  }
+  render() {
     return (
       <div>
-        <div className="serial-row">
-          <span className="serial-number">0</span>
-          <span className="serial-number">1</span>
-          <span className="serial-number">2</span>
-        </div>
-        {squares}
+        <div className="serial-row">{this.getColNums()}</div>
+        {this.getSquares()}
       </div>
     )
   }
