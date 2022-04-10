@@ -1,5 +1,11 @@
 const totalRow = 19
 const totalCol = 19
+function BlackPiece() {
+  return <div className="piece black"></div>
+}
+function WhitePiece() {
+  return <div className="piece white"></div>
+}
 
 function Square(props) {
   return (
@@ -66,7 +72,7 @@ class Game extends React.Component {
       history: [
         {
           squares: Array(9).fill(null),
-          position: ['X'],
+          position: {},
         },
       ],
       stepNumber: 0,
@@ -80,7 +86,7 @@ class Game extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return
     }
-    const who = this.state.xIsNext ? 'X' : 'O'
+    const who = this.state.xIsNext ? <BlackPiece /> : <WhitePiece />
     squares[i] = who
     this.setState({
       history: history.concat([
@@ -111,7 +117,7 @@ class Game extends React.Component {
 
     const moves = history.map((item, index) => {
       const desc = index
-        ? `第 ${index} 步，${item.position.who}(${item.position.x}, ${item.position.y})`
+        ? `第 ${index} ，${item.position.who}(${item.position.x}, ${item.position.y})`
         : '开始'
       return (
         <li
@@ -127,7 +133,8 @@ class Game extends React.Component {
     if (winner) {
       status = 'Winner: ' + winner
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
+      status =
+        '下一步: ' + (this.state.xIsNext ? <BlackPiece /> : <WhitePiece />)
     }
     return (
       <div className="game">
